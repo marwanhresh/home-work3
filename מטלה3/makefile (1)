@@ -1,0 +1,22 @@
+CC = gcc -g
+AR = ar -rcs
+FLAGS = -Wall -fPIC
+
+all: isort txtfind
+isort: isort.o mainS.o
+	$(CC) $(FLAGS) -o isort isort.o mainS.o
+isort.o: isort.c
+	$(CC) $(FLAGS) -c isort.c
+mainS.o: mainS.c
+	$(CC) $(FLAGS) -c mainS.c
+txtfind: txtfind.o main.o
+	$(CC) $(FLAGS) -o txtfind txtfind.o main.o
+txtfind.o: txtfind.c
+	$(CC) $(FLAGS) -c txtfind.c
+main.o: main.c
+	$(CC) $(FLAGS) -c main.c
+
+.PHONY: clean all 
+
+clean:
+	rm -f *.o *.a *.so isort txtfind
